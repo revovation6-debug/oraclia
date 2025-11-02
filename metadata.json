@@ -1,5 +1,7 @@
 {
   "name": "Copy of Oraclia - Psychic Chat",
   "description": "Oraclia is a professional and engaging online psychic chat platform inspired by kang.fr, offering live chat sessions with experienced psychics. It features separate, comprehensive dashboards for clients, agents, and administrators.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

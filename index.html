@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,17 +7,34 @@
     <title>Oraclia - Tchat Voyance</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // This script runs before React to prevent a flash of the light theme
+      // if the user has a dark theme preference.
+      if (localStorage.getItem('oraclia_theme') === 'dark' || (!('oraclia_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
       tailwind.config = {
+        darkMode: 'class', // Enable dark mode using a class
         theme: {
           extend: {
             colors: {
-              'brand-purple': '#4C1D95',
-              'brand-purple-light': '#6D28D9',
-              'brand-purple-dark': '#371A6C',
-              'brand-gold': '#FBBF24',
-              'brand-gold-light': '#FCD34D',
-              'brand-gray': '#1F2937',
-              'brand-light-gray': '#374151',
+              'brand-primary': '#6C63FF',       
+              'brand-primary-light': '#8C84FF',
+              'brand-secondary': '#FF6B6B',     
+              'brand-secondary-light': '#FF9A9A',
+              'brand-bg-light': '#F8F9FA',      
+              'brand-bg-white': '#FFFFFF',
+              'brand-bg-accent': '#EBF4FF',     
+              'brand-text-dark': '#2D3748',     
+              'brand-text-light': '#718096',
+              // Dark theme colors
+              'dark-bg-primary': '#1A202C', // Very dark slate
+              'dark-bg-secondary': '#2D3748', // Dark slate
+              'dark-text-primary': '#F7FAFC', // Off-white
+              'dark-text-secondary': '#A0AEC0', // Lighter gray
+              'dark-border': '#4A5568', // Gray for borders
             },
             fontFamily: {
               'serif': ['Georgia', 'serif'],
@@ -29,10 +45,46 @@
       }
     </script>
     <style>
-      body {
-        background-color: #111827;
-        color: #E5E7EB;
+      :root {
+        --bg-color: #F8F9FA; /* brand-bg-light */
+        --text-color: #2D3748; /* brand-text-dark */
       }
+      :root.dark {
+        --bg-color: #1A202C; /* dark-bg-primary */
+        --text-color: #F7FAFC; /* dark-text-primary */
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+      @keyframes pop-in {
+        0% {
+          opacity: 0;
+          transform: translateY(1rem) scale(0.95);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .animate-pop-in {
+        animation: pop-in 0.3s ease-out forwards;
+      }
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(3rem);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .scroll-animate.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-0 { transition-delay: 0ms; }
+      .delay-100 { transition-delay: 100ms; }
+      .delay-200 { transition-delay: 200ms; }
+      .delay-300 { transition-delay: 300ms; }
+      .delay-400 { transition-delay: 400ms; }
     </style>
   <script type="importmap">
 {
