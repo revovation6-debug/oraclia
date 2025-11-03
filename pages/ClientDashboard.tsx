@@ -51,7 +51,8 @@ const ChatWindow: React.FC<{
     const [isEmojiPickerOpen, setEmojiPickerOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     
-    const timerIdRef = useRef<NodeJS.Timeout | null>(null);
+    // FIX: The return type of setInterval in the browser is `number`, not `NodeJS.Timeout`.
+    const timerIdRef = useRef<number | null>(null);
     const chatStartTimeRef = useRef(Date.now());
     const initialFreeSecondsRef = useRef(initialFreeMinutes * 60);
     const initialTotalSecondsRef = useRef((initialPaidMinutes + initialFreeMinutes) * 60);
@@ -64,7 +65,8 @@ const ChatWindow: React.FC<{
     
     const stopTimerAndEndChat = useCallback(() => {
         if (timerIdRef.current) {
-            clearInterval(timerIdRef.current);
+            // FIX: Use window.clearInterval to ensure the browser's implementation is used, which expects a number.
+            window.clearInterval(timerIdRef.current);
             timerIdRef.current = null;
             
             const elapsedSeconds = Math.floor((Date.now() - chatStartTimeRef.current) / 1000);
@@ -191,7 +193,8 @@ const ChatWindow: React.FC<{
     useEffect(() => {
         if (isReadOnly) return;
 
-        timerIdRef.current = setInterval(() => {
+        // FIX: Use window.setInterval to get a `number` return type, matching the ref's type, instead of NodeJS.Timeout.
+        timerIdRef.current = window.setInterval(() => {
             const elapsedSeconds = Math.floor((Date.now() - chatStartTimeRef.current) / 1000);
             const remaining = initialTotalSecondsRef.current - elapsedSeconds;
 
@@ -210,7 +213,8 @@ const ChatWindow: React.FC<{
         }, 1000);
 
         return () => {
-            if (timerIdRef.current) clearInterval(timerIdRef.current);
+            // FIX: Use window.clearInterval to match the use of window.setInterval.
+            if (timerIdRef.current) window.clearInterval(timerIdRef.current);
         };
     }, [isReadOnly, stopTimerAndEndChat, lowBalanceNotified, addNotification]);
 

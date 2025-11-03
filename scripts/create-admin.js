@@ -1,4 +1,3 @@
-
 /**
  * SCRIPT DE CRÉATION D'ADMINISTRATEUR (EXEMPLE)
  * ---------------------------------------------

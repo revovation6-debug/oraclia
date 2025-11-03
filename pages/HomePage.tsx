@@ -8,6 +8,19 @@ import { mockApi } from '../services/mockData';
 import { StarIcon, ChevronDownIcon, HeartIcon, UserIcon, MessageCircleIcon, UserClockIcon, ShieldCheckIcon, LockIcon, RoosterIcon, TreesIcon, SunIcon, MoonIcon } from '../components/Icons';
 import { Button, Card } from '../components/UI';
 
+const ThemeSwitcher = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    return (
+        <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-gray-200 dark:bg-dark-bg-primary text-brand-text-dark dark:text-dark-text-primary hover:bg-gray-300 dark:hover:bg-dark-border"
+            aria-label="Toggle theme"
+        >
+            {theme === 'light' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
+        </button>
+    );
+};
+
 export const Header: React.FC = () => {
   const { user, logout, login } = useContext(AuthContext);
   const { addNotification } = useContext(NotificationContext);
@@ -103,6 +116,7 @@ export const Header: React.FC = () => {
                 <Button variant="secondary" onClick={openRegisterModal}>Inscription</Button>
               </>
             )}
+            <ThemeSwitcher />
           </div>
         </div>
       </div>
@@ -161,18 +175,7 @@ const PricingCard: React.FC<{ pack: MinutePack, animationClasses?: string }> = (
     );
 };
 
-const ThemeSwitcher = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
-    return (
-        <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-dark-bg-primary text-brand-text-dark dark:text-dark-text-primary hover:bg-gray-300 dark:hover:bg-dark-border"
-            aria-label="Toggle theme"
-        >
-            {theme === 'light' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
-        </button>
-    );
-};
+
 
 
 export const Footer = () => (
@@ -210,7 +213,6 @@ export const Footer = () => (
             </div>
             <div className="flex justify-between items-center text-gray-400 dark:text-gray-500 mt-12 border-t border-gray-200 dark:border-dark-border pt-8">
                 <span>&copy; {new Date().getFullYear()} Oraclia. Tous droits réservés.</span>
-                <ThemeSwitcher />
             </div>
         </div>
     </footer>
