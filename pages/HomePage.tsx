@@ -49,7 +49,9 @@ export const Header: React.FC = () => {
     <header className="bg-brand-bg-white/80 dark:bg-dark-bg-secondary/80 backdrop-blur-md sticky top-0 z-40">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <a href="/#" className="text-3xl font-bold font-serif text-brand-primary">Oraclia</a>
+          <a href="/#" className="flex items-center">
+            <img src="https://raw.githubusercontent.com/revovation6-debug/oraclia/12bb2594b6d2df065d70f7ad11593f4197e2e2d0/logo-oraclia2.png" alt="Oraclia Logo" className="h-20 w-auto" />
+          </a>
           <nav className="hidden md:flex items-center space-x-6 text-brand-text-dark dark:text-dark-text-primary">
             <div className="relative group">
               <a href="/#/experts" className="hover:text-brand-primary transition flex items-center space-x-1 py-2">
@@ -183,7 +185,7 @@ export const Footer = () => (
         <div className="container mx-auto px-4 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 className="text-xl font-bold font-serif text-brand-primary mb-4">Oraclia</h3>
+                    <img src="https://raw.githubusercontent.com/revovation6-debug/oraclia/12bb2594b6d2df065d70f7ad11593f4197e2e2d0/logo-oraclia2.png" alt="Oraclia Logo" className="h-16 w-auto mb-4" />
                     <p className="text-brand-text-light dark:text-dark-text-secondary">Votre avenir, révélé. Consultation de voyance par tchat avec les meilleurs experts.</p>
                 </div>
                 <div>

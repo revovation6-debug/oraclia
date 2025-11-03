@@ -56,7 +56,9 @@ const AdminSidebar: React.FC<{ activePage: AdminPage, setActivePage: (page: Admi
 
   return (
     <aside className="w-64 bg-brand-bg-white dark:bg-dark-bg-secondary p-4 flex flex-col border-r border-gray-200 dark:border-dark-border">
-      <h1 className="text-3xl font-bold font-serif text-brand-primary mb-8 px-2">Oraclia<span className="text-sm text-brand-text-dark dark:text-dark-text-primary"> Admin</span></h1>
+      <div className="px-2 mb-8">
+        <img src="https://raw.githubusercontent.com/revovation6-debug/oraclia/12bb2594b6d2df065d70f7ad11593f4197e2e2d0/logo-oraclia2.png" alt="Oraclia Logo" className="h-20 w-auto" />
+      </div>
       <nav className="flex-grow space-y-2">
         <NavItem page="dashboard" icon={<BarChartIcon className="w-6 h-6" />}>Dashboard</NavItem>
         <NavItem page="manageLogs" icon={<UsersIcon className="w-6 h-6" />}>Gérer les Logs</NavItem>
